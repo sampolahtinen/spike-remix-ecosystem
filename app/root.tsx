@@ -1,4 +1,5 @@
-import type { MetaFunction } from "@remix-run/cloudflare";
+import "@looma/core/dist/style.css";
+import type { LinksFunction, MetaFunction } from "@remix-run/cloudflare";
 import {
   Links,
   LiveReload,
@@ -7,6 +8,19 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+
+import { cssBundleHref } from "@remix-run/css-bundle";
+import lumosStyles from "@looma/core/dist/style.css";
+
+export const links: LinksFunction = () => {
+  return [
+    { rel: "stylesheet", href: cssBundleHref },
+    {
+      rel: "stylesheet",
+      href: lumosStyles,
+    },
+  ];
+};
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
