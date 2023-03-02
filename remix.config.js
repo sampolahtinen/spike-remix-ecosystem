@@ -12,6 +12,7 @@ module.exports = {
   serverPlatform: "neutral",
   future: {
     unstable_vanillaExtract: true,
+    unstable_tailwind: true,
   },
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",

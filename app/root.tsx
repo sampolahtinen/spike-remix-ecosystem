@@ -10,15 +10,19 @@ import {
 } from "@remix-run/react";
 
 import { cssBundleHref } from "@remix-run/css-bundle";
+import globalStyles from "./styles/global.css";
 import lumosStyles from "@looma/core/dist/style.css";
+import tailwindStyles from "./styles/tailwind.css";
 
 export const links: LinksFunction = () => {
   return [
-    { rel: "stylesheet", href: cssBundleHref },
     {
       rel: "stylesheet",
       href: lumosStyles,
     },
+    { rel: "stylesheet", href: tailwindStyles },
+    { rel: "stylesheet", href: globalStyles },
+    { rel: "stylesheet", href: cssBundleHref },
   ];
 };
 
