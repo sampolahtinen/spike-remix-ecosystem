@@ -6,3 +6,5 @@ node_modules
 /public/build
 .env
 .dev.vars
+.env.ts
+.env.auth.ts

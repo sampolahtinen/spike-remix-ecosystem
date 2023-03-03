@@ -13,6 +13,7 @@ import { cssBundleHref } from "@remix-run/css-bundle";
 import globalStyles from "./styles/global.css";
 import lumosStyles from "@looma/core/dist/style.css";
 import tailwindStyles from "./styles/tailwind.css";
+import { LoomaProvider } from "@looma/core";
 
 export const links: LinksFunction = () => {
   return [
@@ -40,7 +41,10 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <LoomaProvider theme="light">
+          <Outlet />
+        </LoomaProvider>
+
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

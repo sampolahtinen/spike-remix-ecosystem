@@ -11,9 +11,14 @@
     "wrangler": "wrangler pages dev ./public",
     "prisma": "prisma"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "dependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@looma/core": "^0.0.4",
     "@looma/tokens": "^0.0.3",
+    "@prisma/client": "^4.11.0",
     "@remix-run/cloudflare": "^1.13.0",
     "@remix-run/cloudflare-pages": "^1.13.0",
     "@remix-run/css-bundle": "^1.13.0",
@@ -38,6 +43,7 @@
     "@cloudflare/workers-types": "^3.18.0",
     "@remix-run/dev": "^1.13.0",
     "@remix-run/eslint-config": "^1.13.0",
+    "@types/faker": "^6.6.9",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.14.2",

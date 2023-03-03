@@ -1,21 +1,13 @@
 import { createCookieSessionStorage } from "@remix-run/cloudflare";
 import { Authenticator } from "remix-auth";
+import type { Auth0Profile } from "remix-auth-auth0";
 import { Auth0Strategy } from "remix-auth-auth0";
-
-// declare global {
-//   namespace NodeJS {
-//     interface ProcessEnv {
-//       AUTH0_CLIENT_ID: string;
-//       AUTH0_CLIENT_SECRET: string;
-//       AUTH0_TENANT_DOMAIN: string;
-//       AUTH0_CALLBACK_URL: string;
-//       COOKIE_SECRET: string;
-//     }
-//   }
-// }
+import { env } from "../../.env.auth";
+import { prisma } from "./db.server";
 
 interface User {
   readonly accessToken: string;
+  readonly auth0UserId: string;
 }
 
 // Create an instance of the authenticator, pass a generic with what your
@@ -35,21 +27,45 @@ export const authenticator = new Authenticator<User>(sessionStorage);
 
 let auth0Strategy = new Auth0Strategy(
   {
-    // callbackURL: env.AUTH0_CALLBACK_URL,
     callbackURL: env.AUTH0_CALLBACK_URL,
     clientID: env.AUTH0_CLIENT_ID,
     clientSecret: env.AUTH0_CLIENT_SECRET,
     domain: env.AUTH0_TENANT_DOMAIN,
+    scope: `openid profile email`,
   },
   async ({ accessToken, refreshToken, extraParams, profile }) => {
-    // Get the user data from your DB or API using the tokens and profile
+    const { displayName, emails } = profile;
+
+    const userMetadata = profile._json as Auth0Profile["_json"] & {
+      auth0UserId: string;
+    };
+
     console.log(`SUCCESS`);
     console.log(accessToken);
-    // const decoded = jwt.decode(accessToken);
-    // console.log(`decoded`, decoded);
+    console.log(`profile`, profile);
 
-    return { accessToken };
-    // return User.findOrCreate({ email: profile.emails[0].value });
+    if (displayName && emails && userMetadata) {
+      try {
+        const createdUser = await prisma.user.upsert({
+          where: { auth0UserId: userMetadata.auth0UserId },
+          update: {
+            email: emails[0].value,
+            name: displayName,
+          },
+          create: {
+            email: emails[0].value,
+            name: displayName,
+            auth0UserId: userMetadata.auth0UserId,
+          },
+        });
+        console.log(`createdUser`, createdUser);
+      } catch (error) {
+        console.log(error);
+        // throw new Error(`Access denied`);
+      }
+    }
+
+    return { accessToken, auth0UserId: userMetadata.auth0UserId };
   }
 );
 

@@ -4,11 +4,12 @@ import { redirect } from "@remix-run/cloudflare";
 import { authenticator } from "../../lib/auth.server";
 
 export let loader = async ({ context }: LoaderArgs) => {
-  console.log(`This is fine, it logs .dev.vars`);
-  console.log(context);
   return redirect("/login");
 };
 
-export let action = ({ request, context }: ActionArgs) => {
-  return authenticator.authenticate("auth0", request, { context });
+export let action = async ({ request, context }: ActionArgs) => {
+  // if (await authenticator.isAuthenticated(request)) {
+  //   return redirect("/");
+  // }
+  return authenticator.authenticate("auth0", request);
 };

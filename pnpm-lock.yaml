@@ -2,8 +2,10 @@ lockfileVersion: 5.4
 
 specifiers:
   '@cloudflare/workers-types': ^3.18.0
+  '@faker-js/faker': ^7.6.0
   '@looma/core': ^0.0.4
   '@looma/tokens': ^0.0.3
+  '@prisma/client': ^4.11.0
   '@remix-run/cloudflare': ^1.13.0
   '@remix-run/cloudflare-pages': ^1.13.0
   '@remix-run/css-bundle': ^1.13.0
@@ -11,6 +13,7 @@ specifiers:
   '@remix-run/eslint-config': ^1.13.0
   '@remix-run/react': ^1.13.0
   '@remix-validated-form/with-zod': ^2.0.5
+  '@types/faker': ^6.6.9
   '@types/jsonwebtoken': ^9.0.1
   '@types/lodash': ^4.14.191
   '@types/node': ^18.14.2
@@ -36,8 +39,10 @@ specifiers:
   zod: ^3.20.6
 
 dependencies:
+  '@faker-js/faker': 7.6.0
   '@looma/core': 0.0.4_biqbaboplfbrettd7655fr4n2y
   '@looma/tokens': 0.0.3
+  '@prisma/client': 4.11.0_prisma@4.11.0
   '@remix-run/cloudflare': 1.13.0_3aj2hlnru2coifkh7o3itcdmie
   '@remix-run/cloudflare-pages': 1.13.0_3aj2hlnru2coifkh7o3itcdmie
   '@remix-run/css-bundle': 1.13.0
@@ -62,6 +67,7 @@ devDependencies:
   '@cloudflare/workers-types': 3.19.0
   '@remix-run/dev': 1.13.0
   '@remix-run/eslint-config': 1.13.0_ezujzymwn6i6oisrjb2haixety
+  '@types/faker': 6.6.9
   '@types/jsonwebtoken': 9.0.1
   '@types/lodash': 4.14.191
   '@types/node': 18.14.2
@@ -1480,6 +1486,11 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
+  /@faker-js/faker/7.6.0:
+    resolution: {integrity: sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    dev: false
+
   /@gar/promisify/1.1.3:
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
 
@@ -1793,6 +1804,24 @@ packages:
       tslib: 2.5.0
     dev: true
 
+  /@prisma/client/4.11.0_prisma@4.11.0:
+    resolution: {integrity: sha512-0INHYkQIqgAjrt7NzhYpeDQi8x3Nvylc2uDngKyFDDj1tTRQ4uV1HnVmd1sQEraeVAN63SOK0dgCKQHlvjL0KA==}
+    engines: {node: '>=14.17'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      '@prisma/engines-version': 4.11.0-57.8fde8fef4033376662cad983758335009d522acb
+      prisma: 4.11.0
+    dev: false
+
+  /@prisma/engines-version/4.11.0-57.8fde8fef4033376662cad983758335009d522acb:
+    resolution: {integrity: sha512-3Vd8Qq06d5xD8Ch5WauWcUUrsVPdMC6Ge8ILji8RFfyhUpqon6qSyGM0apvr1O8n8qH8cKkEFqRPsYjuz5r83g==}
+    dev: false
+
   /@prisma/engines/4.11.0:
     resolution: {integrity: sha512-0AEBi2HXGV02cf6ASsBPhfsVIbVSDC9nbQed4iiY5eHttW9ZtMxHThuKZE1pnESbr8HRdgmFSa/Kn4OSNYuibg==}
     requiresBuild: true
@@ -2060,6 +2089,13 @@ packages:
 
   /@types/estree/1.0.0:
     resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
+
+  /@types/faker/6.6.9:
+    resolution: {integrity: sha512-Y9YYm5L//8ooiiknO++4Gr539zzdI0j3aXnOBjo1Vk+kTvffY10GuE2wn78AFPECwZ5MYGTjiDVw1naLLdDimw==}
+    deprecated: This is a stub types definition. faker provides its own type definitions, so you do not need this installed.
+    dependencies:
+      faker: 6.6.6
+    dev: true
 
   /@types/glob/7.2.0:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
@@ -3820,7 +3856,6 @@ packages:
 
   /faker/6.6.6:
     resolution: {integrity: sha512-9tCqYEDHI5RYFQigXFwF1hnCwcWCOJl/hmll0lr5D2Ljjb0o4wphb69wikeJDz5qCEzXCoPvG6ss5SDP6IfOdg==}
-    dev: false
 
   /fast-deep-equal/3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}

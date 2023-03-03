@@ -3,12 +3,13 @@ generator client {
 }
 
 datasource db {
-  provider = "postgres"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = "prisma://aws-us-east-1.prisma-data.com/?api_key=T8r6vz0SFbQnIyLynu96Hj2SWHBQ_et5xHYvslf1ZmMWLKFK-4080bwMruzHU9Ss"
 }
 
 model User {
   id           String        @id @default(uuid())
+  auth0UserId  String?       @unique
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   name         String

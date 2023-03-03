@@ -43,9 +43,18 @@ export default function Index() {
   // const { me, message } = useLoaderData<typeof loader>();
 
   return (
-    <div className="h-screen grid grid-rows-[56px_1fr]">
+    <div className="h-screen">
       <Header />
-      <Outlet />
+      <div
+        className={sprinkles({
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: 100,
+        })}
+      >
+        <Outlet />
+      </div>
     </div>
   );
 }
@@ -63,9 +72,9 @@ const Header = () => (
         Demos
       </Button>
     </Link>
-    <Link to="/projects">
+    <Link to="/playlists">
       <Button type="button" variant="secondary">
-        Projects
+        Playlists
       </Button>
     </Link>
     <Link
